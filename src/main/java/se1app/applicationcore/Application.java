@@ -9,6 +9,17 @@ import java.util.Arrays;
 
 @SpringBootApplication
 public class Application {
+
+    @Bean
+    CommandLineRunner init(CustomerRepository customerRepository) {
+        return (evt) -> Arrays.asList(
+                "mueller,meier,schulze".split(","))
+                .forEach(
+                        a -> {
+                            customerRepository.save(new Customer(a));
+                        });
+    }
+
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
