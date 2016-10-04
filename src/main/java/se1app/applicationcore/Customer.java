@@ -16,23 +16,12 @@ public class Customer {
 
     private String name;
 
-    // Fachlicher Datentyp (immutable)
-    private EmailType email;
-
-    // Definition einer 1:*-Beziehung
-    // Kaskadierende Operationen
-    // Name des Fremdschlüssels gesetzt, weil wir ihn in einer Query verwenden müssen
-    //  (siehe Methode findCustomersByMovie() in Klasse CustomerRepository)
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="customer_id")
-    private List<Reservation> reservations = new ArrayList<>();
 
     public Customer() {}
 
-    public Customer(String name, EmailType email)
+    public Customer(String name)
     {
         this.name = name;
-        this.email = email;
     }
 
     public Integer getId() {
@@ -41,23 +30,6 @@ public class Customer {
 
     public String getName() {
         return name;
-    }
-
-    public EmailType getEmail() {
-        return email;
-    }
-
-    public void setEmail(EmailType email) {
-        this.email = email;
-    }
-
-    public void addReservation(Reservation reservation)
-    {
-        this.reservations.add(reservation);
-    }
-
-    public List<Reservation> getReservations() {
-        return reservations;
     }
 
     @Override

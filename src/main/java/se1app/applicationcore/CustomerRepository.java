@@ -12,8 +12,4 @@ import java.util.Optional;
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
     // Spring leitet die Query aus der Signatur ab ("name" ist ein Attribut von Customer)
     Optional<Customer> findByName(String name);
-
-    // Hier definieren wir eine eigene SQL-Query ("native")
-    @Query(value = "SELECT * FROM CUSTOMER WHERE EXISTS (SELECT * FROM RESERVATION WHERE RESERVATION.CUSTOMER_ID=CUSTOMER.ID AND RESERVATION.MOVIE=:movie)", nativeQuery = true)
-    List<Customer> findCustomersByMovie(@Param("movie") String movie);
 }
